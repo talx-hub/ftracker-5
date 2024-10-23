@@ -14,6 +14,11 @@ const (
 	CmInM      = 100  // количество сантиметров в одном метре
 )
 
+func floatEqual(lhs float64, rhs float64) bool {
+    eps := 0.001
+    return math.Abs(lhs-rhs) < eps
+}
+
 // Training общая структура для всех тренировок
 type Training struct {
 	...        	// тип тренировки
