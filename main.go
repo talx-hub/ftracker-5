@@ -91,8 +91,8 @@ func (i InfoMessage) String() string {
 
 // CaloriesCalculator интерфейс для структур: Running, Walking и Swimming.
 type CaloriesCalculator interface {
-	// добавьте необходимые методы в интерфейс
-	...
+    Calories() float64
+    TrainingInfo() InfoMessage
 }
 
 // Константы для расчета потраченных килокалорий при беге.
