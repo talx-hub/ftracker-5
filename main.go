@@ -52,29 +52,41 @@ func (t Training) Calories() float64 {
 
 // InfoMessage содержит информацию о проведенной тренировке.
 type InfoMessage struct {
-	// добавьте необходимые поля в структуру
-	...     // тип тренировки
-	... 	// длительность тренировки
-	...     // расстояние, которое преодолел пользователь
-	...     // средняя скорость, с которой двигался пользователь
-	...     // количество потраченных килокалорий на тренировке
+    // добавьте необходимые поля в структуру
+    TrainingType string        // тип тренировки
+    Duration     time.Duration // продолжительность тренировки
+    Distance     float64       // расстояние, которое преодолел пользователь [км]
+    Speed        float64       // средняя скорость пользователя [км/ч]
+    Calories     float64       // количество потраченных килокалорий на тренировке
 }
 
-// TrainingInfo возвращает труктуру InfoMessage, в которой хранится вся информация о проведенной тренировке.
+// TrainingInfo возвращает труктуру InfoMessage,
+// в которой хранится вся информация о проведенной тренировке.
 func (t Training) TrainingInfo() InfoMessage {
-	// вставьте ваш код ниже
-	...
+    return InfoMessage{
+        TrainingType: t.TrainingType,
+        Duration:     t.Duration,
+        Distance:     t.distance(),
+        Speed:        t.meanSpeed(),
+        Calories:     t.Calories(),
+    }
 }
 
 // String возвращает строку с информацией о проведенной тренировке.
 func (i InfoMessage) String() string {
-	return fmt.Sprintf("Тип тренировки: %s\nДлительность: %v мин\nДистанция: %.2f км.\nСр. скорость: %.2f км/ч\nПотрачено ккал: %.2f\n",
-		i.TrainingType,
-		i.Duration.Minutes(),
-		i.Distance,
-		i.Speed,
-		i.Calories,
-	)
+    return fmt.Sprintf(
+        `Тип тренировки: %s
+Длительность: %v мин
+Дистанция: %.2f км.
+Ср. скорость: %.2f км/ч
+Потрачено ккал: %.2f
+`,
+        i.TrainingType,
+        i.Duration.Minutes(),
+        i.Distance,
+        i.Speed,
+        i.Calories,
+    )
 }
 
 // CaloriesCalculator интерфейс для структур: Running, Walking и Swimming.
